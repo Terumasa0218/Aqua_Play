@@ -29,6 +29,7 @@ Before using any AI coding agent in this repository, read:
 - [`WORKFLOW.md`](WORKFLOW.md)
 - [`PLAN.md`](PLAN.md)
 - [`AQUAPLAY_GARDEN_SPEC.md`](AQUAPLAY_GARDEN_SPEC.md)
+- [`docs/spec-readiness-review.md`](docs/spec-readiness-review.md)
 - [`docs/ai-assisted-development-setup.md`](docs/ai-assisted-development-setup.md)
 
 ## MVP Baseline
@@ -69,6 +70,7 @@ Main responsibilities:
 - `AGENTS.md`: startup instructions for AI agents.
 - `AI_RULES.md`: safety and Git operating rules.
 - `docs/`: setup and workflow documentation.
+- `docs/spec-readiness-review.md`: current Markdown readiness and non-blocking concerns.
 - `blender/`: Blender source scripts and exports for Unity assets.
 - `unity/`: Unity project and generated Unity assets.
 - `tools/`: repository-local automation wrappers.
@@ -95,7 +97,7 @@ Create a safe Git checkpoint:
 
 ## Default Delivery Policy
 
-Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to commit or push, code and documentation changes should be carried through to a Git commit and pushed to a dated branch.
+Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to commit or push, code and documentation changes should be carried through to a Git commit, pushed to a dated branch, prepared as a dated pull request, and merged into `main` after user approval.
 
 Work should proceed phase by phase. After each phase, push the work, report the result, and wait for user confirmation before starting the next phase. See [`WORKFLOW.md`](WORKFLOW.md).
 
@@ -106,3 +108,9 @@ ai/YYYY-MM-DD-short-description
 ```
 
 Do not force push. Do not rewrite history. Direct pushes to `main` require explicit user instruction.
+
+Pull request titles should include the date, for example:
+
+```text
+2026-05-15: docs add workflow policy
+```
