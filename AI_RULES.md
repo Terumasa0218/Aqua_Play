@@ -67,9 +67,14 @@ Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to c
 1. focused edits,
 2. validation,
 3. Git commit,
-4. push to a dated branch.
+4. push to a dated branch,
+5. dated pull request creation or update,
+6. merge into `main` after user approval,
+7. local `main` synchronization.
 
-Direct pushes to `main` require explicit user instruction. Force pushing is prohibited.
+Pull request titles must include a date in `YYYY-MM-DD` format so rollback points are easy to identify.
+
+Direct pushes to `main` require explicit user instruction unless a repository intentionally does not use pull requests. Force pushing is prohibited.
 
 Work must follow the phase-based review flow in `WORKFLOW.md`: finish a phase, push it, report it, and wait for user confirmation before starting the next phase.
 
@@ -129,6 +134,8 @@ Commit rules:
 - Include a clear prefix such as `docs:`, `tools:`, `blender:`, `unity:`, `gameplay:`, or `pipeline:`.
 - Review `git diff` and run `git diff --check` before every commit.
 - Push the dated branch unless the user requested discussion only or asked not to push.
+- Use dated pull request titles, such as `2026-05-15: docs add workflow policy`.
+- Merge approved work into `main` and synchronize local `main`.
 
 Prohibited Git operations:
 

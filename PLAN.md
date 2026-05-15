@@ -126,4 +126,5 @@ These are not blockers for the MVP direction:
 - Keep `WORKFLOW.md` focused on phase-based collaboration, push, review, and rollback behavior.
 - Keep `PLAN.md` focused on decisions and next implementation phases.
 - Keep `AQUAPLAY_GARDEN_SPEC.md` focused on game behavior.
+- Keep `docs/spec-readiness-review.md` focused on implementation-readiness concerns in the Markdown set.
 - Keep `docs/ai-assisted-development-setup.md` focused on Unity and Blender setup.
