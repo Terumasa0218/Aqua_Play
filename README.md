@@ -97,7 +97,7 @@ Create a safe Git checkpoint:
 
 ## Default Delivery Policy
 
-Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to commit or push, code and documentation changes should be carried through to a Git commit, pushed to a dated branch, prepared as a dated pull request, and merged into `main` after user approval.
+Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to commit or push, code and documentation changes should be carried through to a Git commit, pushed to a dated branch, prepared as a pull request with date/time in the title, merged into `main`, and synchronized locally.
 
 Work should proceed phase by phase. After each phase, push the work, report the result, and wait for user confirmation before starting the next phase. See [`WORKFLOW.md`](WORKFLOW.md).
 
@@ -109,8 +109,8 @@ ai/YYYY-MM-DD-short-description
 
 Do not force push. Do not rewrite history. Direct pushes to `main` require explicit user instruction.
 
-Pull request titles should include the date, for example:
+Pull request titles should include date, time, and `JST`, for example:
 
 ```text
-2026-05-15: docs add workflow policy
+2026-05-15 12:34 JST: docs add workflow policy
 ```

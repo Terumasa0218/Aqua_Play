@@ -18,8 +18,8 @@ Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to c
 2. validation,
 3. Git commit,
 4. push to a dated branch,
-5. create or update a dated pull request,
-6. after user approval, merge into `main`,
+5. create or update a pull request whose title includes `YYYY-MM-DD HH:mm JST`,
+6. merge into `main`,
 7. synchronize local `main`.
 
 Use a dated branch such as:
@@ -28,7 +28,7 @@ Use a dated branch such as:
 ai/YYYY-MM-DD-short-description
 ```
 
-Pull request titles must include the date, such as `2026-05-15: docs add workflow policy`, so rollback points are easy to identify.
+Pull request titles must include date, time, and `JST`, such as `2026-05-15 12:34 JST: docs add workflow policy`, so rollback points are easy to identify.
 
 Do not force push. Do not push directly to `main` unless the user explicitly asks for it or the repository intentionally does not use pull requests.
 
