@@ -31,6 +31,7 @@ Allowed areas:
 - `AQUAPLAY_GARDEN_SPEC.md`
 - `PLAN.md`
 - `README.md`
+- `WORKFLOW.md`
 - `docs/`
 - `blender/`
 - `unity/`
@@ -51,12 +52,13 @@ Before making changes, the AI agent must:
 
 1. Read `AGENTS.md` if present.
 2. Read `AI_RULES.md`.
-3. Read `PLAN.md` if present.
-4. Read `AQUAPLAY_GARDEN_SPEC.md` when the task affects game design, MVP scope, or implementation direction.
-5. Confirm the current working directory is the repository root.
-6. Run `git status --short`.
-7. Identify the files it expects to change.
-8. Avoid touching unrelated files.
+3. Read `WORKFLOW.md` if present.
+4. Read `PLAN.md` if present.
+5. Read `AQUAPLAY_GARDEN_SPEC.md` when the task affects game design, MVP scope, or implementation direction.
+6. Confirm the current working directory is the repository root.
+7. Run `git status --short`.
+8. Identify the files it expects to change.
+9. Avoid touching unrelated files.
 
 ## 3. Default Delivery Policy
 
@@ -68,6 +70,8 @@ Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to c
 4. push to a dated branch.
 
 Direct pushes to `main` require explicit user instruction. Force pushing is prohibited.
+
+Work must follow the phase-based review flow in `WORKFLOW.md`: finish a phase, push it, report it, and wait for user confirmation before starting the next phase.
 
 ## 4. Tool Execution Restrictions
 
