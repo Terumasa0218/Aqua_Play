@@ -1,195 +1,125 @@
-# AI Development Rules
+# AI Rules for Aqua_Play
 
-## 1. Purpose
+These rules define the mandatory operating contract for any AI coding agent working in this repository.
 
-This repository is operated with AI-assisted development. Any AI coding agent working in this repository must strictly follow all rules in this document.
+## 1. Scope Boundary
 
-These rules define the required safety boundaries, workflow expectations, repository restrictions, and development standards for AI-assisted work on this game development project.
+The AI agent may read and modify only this repository and its subdirectories.
 
-## 2. Allowed Scope
+Allowed areas:
 
-The AI agent is only allowed to interact with the following:
+- `AI_RULES.md`
+- `README.md`
+- `docs/`
+- `blender/`
+- `unity/`
+- `tools/`
+- Git metadata for normal non-destructive status, diff, add, commit, and branch operations
 
-- Blender
-- Unity
-- Files inside the specified repository
+The AI agent must not access, inspect, or modify:
 
-The AI agent must not:
+- User home directories outside this repository
+- Desktop, Documents, Downloads, cloud-sync folders, SSH keys, browser profiles, or credential stores
+- System directories such as `/etc`, `/usr`, `/bin`, `/var`, `/Library`, `C:\Windows`, or `C:\Users` outside the repository
+- Other repositories or unrelated projects
+- OS settings, services, launch agents, registry entries, package managers, or global editor settings
 
-- Access files outside the repository
-- Access system directories
-- Access personal files
-- Access browser data
-- Access passwords or credentials
-- Modify operating system settings
-- Install unrelated software
-- Execute unrelated shell commands
+## 2. Required Startup Checklist
 
-## 3. Repository Restriction
+Before making changes, the AI agent must:
 
-The AI agent may only modify files inside the specified repository.
+1. Read `AI_RULES.md`.
+2. Confirm the current working directory is the repository root.
+3. Run `git status --short`.
+4. Identify the files it expects to change.
+5. Avoid touching unrelated files.
 
-The AI agent must not:
+## 3. Tool Execution Restrictions
 
-- Access other repositories
-- Clone unrelated repositories
-- Modify global Git configuration
-- Push to unrelated remotes
+The AI agent may run repository-local automation only through scripts in `tools/` or explicit commands documented in `docs/ai-assisted-development-setup.md`.
 
-All repository work must remain limited to the current project unless the user explicitly authorizes otherwise.
+Allowed command categories:
 
-## 4. Allowed Applications
+- `git status`, `git diff`, `git add`, `git commit`, `git branch`, `git switch`, `git log`
+- Blender batch execution against scripts in `blender/scripts/`
+- Unity batch execution against project path `unity/`
+- Repository-local validation commands
 
-Allowed applications and tools:
+Prohibited command categories:
 
-- Blender
-- Unity
-- Git
-- Terminal commands required for project development
+- `sudo`
+- Force pushing
+- History rewriting
+- Deleting untracked repository content without explicit user approval
+- Recursive destructive shell commands such as `rm -rf` outside generated build/cache directories
+- Network downloads or package installs without explicit user approval
+- Commands that read or write outside the repository root
 
-Forbidden applications and tools:
+## 4. Blender Rules
 
-- Any unrelated application or tool
+- Blender scripts must live in `blender/scripts/`.
+- Generated Blender exports must be written to `blender/exports/`.
+- Exported runtime assets should use `.glb` and `.fbx` formats.
+- Scripts must be deterministic when possible and should avoid absolute paths.
+- Scripts must resolve output paths relative to the repository root.
 
-The AI agent must use only the applications and tools required to complete the requested project development task.
+## 5. Unity Rules
 
-## 5. Mandatory Workflow
-
-The AI agent must follow this workflow exactly.
-
-### Step 1: Perform Only the Requested Task
-
-- Perform only the task explicitly requested by the user.
-- Do not expand the scope of work without approval.
-- Do not begin unrelated improvements, cleanup, refactors, or optimizations.
-
-### Step 2: Stop After Task Completion
-
-After completing the requested task, the AI agent must:
-
-- Stop work immediately.
-- Explain all changes clearly.
-- Wait for user confirmation before continuing.
-
-The AI agent must not continue automatically.
-
-### Step 3: Create a Backup Point Before the Next Task
-
-Before starting the next task, the AI agent must create a backup point and ensure rollback capability.
-
-Preferred backup methods include:
-
-- Git commit
-- Git tag
-- Branch snapshot
-
-Rollback capability is mandatory before additional work begins.
-
-### Step 4: Use a Date-Based Branch Name
-
-The AI agent must use a branch name that contains the current date.
-
-Branch name format:
-
-```text
-yyyy-mm-dd-task-name
-```
-
-Example:
-
-```text
-2026-05-15-create-ai-rules
-```
+- Unity project files must live under `unity/`.
+- Editor automation scripts must live under `unity/Assets/Editor/`.
+- Generated Unity assets and prefabs must live under `unity/Assets/Generated/`.
+- Unity command line execution must use `-batchmode`, `-quit`, and `-projectPath unity`.
+- Editor scripts must validate paths before importing, creating, or deleting assets.
 
 ## 6. Git Rules
 
-The AI agent must:
+Branch names must include an ISO date in `YYYY-MM-DD` format.
 
-- Commit frequently.
-- Keep commits small.
-- Write clear commit messages.
-- Avoid destructive Git operations.
+Recommended branch pattern:
 
-The AI agent must not:
-
-- Force push.
-- Delete branches without permission.
-- Rewrite commit history.
-- Execute dangerous Git commands without explicit user approval.
-
-Forbidden Git command examples include:
-
-```bash
-git push --force
-git reset --hard
-git clean -fd
+```text
+ai/YYYY-MM-DD-short-description
 ```
 
-These commands must not be executed unless explicitly approved by the user.
+Commit rules:
 
-## 7. File Safety Rules
+- Commit frequently at safe checkpoints.
+- Keep commits focused and reviewable.
+- Include a clear prefix such as `docs:`, `tools:`, `blender:`, `unity:`, or `pipeline:`.
+- Review `git diff` before every commit.
 
-The AI agent must:
+Prohibited Git operations:
 
-- Preserve existing assets whenever possible.
-- Avoid overwriting files without confirmation.
-- Avoid deleting files unless necessary.
+- `git push --force`
+- `git push --force-with-lease`
+- `git reset --hard` unless explicitly requested by the user
+- `git rebase` unless explicitly requested by the user
+- `git commit --amend` unless explicitly requested by the user
+- Filtering or rewriting history
 
-Before deleting files, the AI agent must:
+## 7. Rollback Requirements
 
-- Explain why deletion is necessary.
-- Wait for user approval.
+Every AI task must preserve rollback capability:
 
-The AI agent must treat all existing project files, assets, scenes, prefabs, scripts, and configuration files as valuable unless the user states otherwise.
+- Use Git commits as restore points.
+- Prefer adding new generated files over overwriting hand-authored assets.
+- Document generated asset sources and commands.
+- Keep terminal commands reproducible.
 
-## 8. Blender Rules
+Rollback examples:
 
-The AI agent must:
+```bash
+git status --short
+git log --oneline --max-count=10
+git revert <commit-sha>
+```
 
-- Preserve scale consistency.
-- Preserve coordinate conventions.
-- Preserve modular connection standards.
+## 8. Human Approval Policy
 
-Generated Blender assets should:
+The AI agent should behave conservatively:
 
-- Be reusable.
-- Follow project scale rules.
-- Use clean naming conventions.
-
-The AI agent must avoid introducing assets that conflict with established scale, orientation, naming, or modular assembly conventions.
-
-## 9. Unity Rules
-
-The AI agent must:
-
-- Avoid breaking scenes.
-- Avoid changing project-wide settings unnecessarily.
-- Avoid modifying unrelated prefabs or assets.
-
-Before finalizing work, the AI agent must explain:
-
-- Scene changes.
-- Prefab changes.
-- Serialized asset changes.
-
-Unity changes must be limited to the requested task and must preserve existing project behavior whenever possible.
-
-## 10. Error Handling
-
-If uncertain, the AI agent must:
-
-- Stop.
-- Explain the uncertainty.
-- Ask for clarification.
-
-The AI agent must not guess when destructive operations are involved.
-
-Destructive or high-risk operations require explicit user approval before execution.
-
-## 11. Core Principle
-
-Safety is prioritized over speed.
-
-Rollback capability is mandatory.
-
-The AI agent must behave conservatively and predictably at all times. The agent must protect existing work, minimize risk, and avoid unnecessary changes while completing only the task requested by the user.
+- Explain planned changes before large refactors.
+- Prefer small diffs.
+- Never assume destructive cleanup is acceptable.
+- Require user approval before deleting or replacing valuable assets.
+- Treat user-created art, scenes, prefabs, and scripts as protected unless explicitly instructed otherwise.
