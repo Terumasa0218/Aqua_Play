@@ -26,6 +26,7 @@ Before using any AI coding agent in this repository, read:
 
 - [`AGENTS.md`](AGENTS.md)
 - [`AI_RULES.md`](AI_RULES.md)
+- [`WORKFLOW.md`](WORKFLOW.md)
 - [`PLAN.md`](PLAN.md)
 - [`AQUAPLAY_GARDEN_SPEC.md`](AQUAPLAY_GARDEN_SPEC.md)
 - [`docs/ai-assisted-development-setup.md`](docs/ai-assisted-development-setup.md)
@@ -64,6 +65,7 @@ Main responsibilities:
 
 - `AQUAPLAY_GARDEN_SPEC.md`: game design, MVP behavior, and phase definitions.
 - `PLAN.md`: current decisions, next tasks, and open design questions.
+- `WORKFLOW.md`: phase-based collaboration, push, review, and rollback flow.
 - `AGENTS.md`: startup instructions for AI agents.
 - `AI_RULES.md`: safety and Git operating rules.
 - `docs/`: setup and workflow documentation.
@@ -94,6 +96,8 @@ Create a safe Git checkpoint:
 ## Default Delivery Policy
 
 Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to commit or push, code and documentation changes should be carried through to a Git commit and pushed to a dated branch.
+
+Work should proceed phase by phase. After each phase, push the work, report the result, and wait for user confirmation before starting the next phase. See [`WORKFLOW.md`](WORKFLOW.md).
 
 Default branch pattern:
 
