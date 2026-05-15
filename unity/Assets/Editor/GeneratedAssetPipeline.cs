@@ -37,7 +37,7 @@ namespace AquaPlay.Editor
                 return;
             }
 
-            foreach (string sourcePath in Directory.EnumerateFiles(exportRoot, "*.*", SearchOption.TopDirectoryOnly))
+            foreach (string sourcePath in Directory.EnumerateFiles(exportRoot, "*.*", SearchOption.AllDirectories))
             {
                 string extension = Path.GetExtension(sourcePath).ToLowerInvariant();
                 if (extension != ".glb" && extension != ".fbx")
@@ -45,7 +45,8 @@ namespace AquaPlay.Editor
                     continue;
                 }
 
-                string destinationAssetPath = ToAssetPath(Path.Combine(ImportedRoot, Path.GetFileName(sourcePath)));
+                string relativePath = sourcePath.Substring(exportRoot.Length).TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                string destinationAssetPath = ToAssetPath(Path.Combine(ImportedRoot, relativePath));
                 ValidateGeneratedAssetPath(destinationAssetPath);
 
                 string absoluteDestinationPath = Path.Combine(projectRoot, destinationAssetPath);
