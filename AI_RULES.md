@@ -68,11 +68,11 @@ Unless the user explicitly says `議論のみ`, `相談のみ`, or says not to c
 2. validation,
 3. Git commit,
 4. push to a dated branch,
-5. dated pull request creation or update,
-6. merge into `main` after user approval,
+5. pull request creation or update with `YYYY-MM-DD HH:mm JST` in the title,
+6. merge into `main`,
 7. local `main` synchronization.
 
-Pull request titles must include a date in `YYYY-MM-DD` format so rollback points are easy to identify.
+Pull request titles must include date, time, and `JST` in `YYYY-MM-DD HH:mm JST` format so rollback points are easy to identify.
 
 Direct pushes to `main` require explicit user instruction unless a repository intentionally does not use pull requests. Force pushing is prohibited.
 
@@ -134,7 +134,7 @@ Commit rules:
 - Include a clear prefix such as `docs:`, `tools:`, `blender:`, `unity:`, `gameplay:`, or `pipeline:`.
 - Review `git diff` and run `git diff --check` before every commit.
 - Push the dated branch unless the user requested discussion only or asked not to push.
-- Use dated pull request titles, such as `2026-05-15: docs add workflow policy`.
+- Use dated pull request titles, such as `2026-05-15 12:34 JST: docs add workflow policy`.
 - Merge approved work into `main` and synchronize local `main`.
 
 Prohibited Git operations:
